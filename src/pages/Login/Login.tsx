@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-import Page from "../../utils/route";
+import { Page } from "../../utils/route";
 import { Link } from "react-router-dom";
 
 export const Login: React.FC = () => {

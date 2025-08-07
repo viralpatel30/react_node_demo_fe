@@ -9,12 +9,12 @@ import { Login } from "./pages/Login/Login";
 import { UserDashboard } from "./components/User/UserDashboard";
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
 
-import Page from "./utils/route";
 import { Registration } from "./pages/Registration/Registration";
 import { LOCAL_STORAGE } from "./utils/enum";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Page } from "./utils/route";
 
 interface ProtectedRouteProps {
   children: JSX.Element;

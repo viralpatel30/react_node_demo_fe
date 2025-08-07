@@ -1,8 +1,7 @@
 export enum TOASTER_SUCCESS_MSG {
-  IS_LOGIN = "LogedIn Successfuly",
-  TOKEN_VERIFIED = "Token Verified !!",
+  IS_LOGIN = "LoGged In Successfuly",
   IS_REGISTER = "Registered Successfuly",
-  VARIANT_SUBMITTED = "Variant submitted successfully!",
+  PRODUCT_CREATION_SUCCESS = "Product created successfully!",
 }
 
 export enum TOASTER_ERROR_MSG {

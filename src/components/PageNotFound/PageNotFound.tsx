@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import PageNotFoundImage from "../../assets/PageNotFoundLogo.png";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import Page from "../../utils/route";
+import { Page } from "../../utils/route";
 
 const PageNotFound: React.FC = () => {
   return (

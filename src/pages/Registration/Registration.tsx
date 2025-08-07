@@ -12,14 +12,14 @@ import PersonIcon from "@mui/icons-material/Person";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
-import Page from "../../utils/route";
+import { Page } from "../../utils/route";
 import { Link } from "react-router-dom";
 
 export const Registration: React.FC = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   // Function to toggle the password visibility
   const handleClickShowPassword = () => {
@@ -109,7 +109,7 @@ export const Registration: React.FC = () => {
         <Button
           variant="contained"
           className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-          sx={{ mt: 2 }}
+          sx={{ mt: 2, borderRadius: "20px" }}
           fullWidth
         >
           Register
