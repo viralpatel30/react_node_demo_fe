@@ -57,13 +57,14 @@ export const Login: React.FC = () => {
         password: values.password,
       };
       const response = await loginUser(data);
+      console.log("response", response);
       // Set access token in local storage
       const tokenData = {
         accessToken: response,
         email: values.email,
       };
-      const tokenDataString = JSON.stringify(tokenData);
-      localStorage.setItem(access_token, tokenDataString);
+      console.log("tokenData", tokenData);
+      localStorage.setItem(access_token, tokenData.accessToken.data.token);
       toastSuccess(TOASTER_SUCCESS_MSG.IS_LOGIN);
       navigate(Page.USER_DASHBOARD);
     } catch (error) {

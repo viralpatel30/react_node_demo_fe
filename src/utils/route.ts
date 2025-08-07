@@ -6,8 +6,8 @@ export enum Page {
 }
 
 export enum API_ENDPOINTS {
-  LOGIN = "/api/login",
-  REGISTER = "/api/register",
-  CREATE_PRODUCT = "/api/create-product",
-  GET_PRODUCTS = "/api/get-product",
+  LOGIN = "/api/auth/login",
+  REGISTER = "/api/auth/register",
+  CREATE_PRODUCT = "/api/product/create-product",
+  GET_PRODUCTS = "/api/product/get-products",
 }

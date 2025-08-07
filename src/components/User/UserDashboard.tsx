@@ -16,10 +16,26 @@ import AddIcon from "@mui/icons-material/Add";
 import toastSuccess from "../../utils/toast";
 import { REQUIRED_ERROR, TOASTER_SUCCESS_MSG } from "../../utils/enum";
 import { Variant } from "../../models/Variant";
+import { createProduct } from "../../services/request";
+import { ProductData } from "../../models/Product";
 
 export const UserDashboard: React.FC = () => {
-  const handleSubmit = () => {
-    toastSuccess(TOASTER_SUCCESS_MSG.PRODUCT_CREATION_SUCCESS);
+  const handleSubmit = async (
+    values: typeof INITIAL_FORM_STATE,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    try {
+      const payload: ProductData = {
+        name: values.name,
+        variants: values.variants,
+      };
+      console.log("payload", payload);
+      await createProduct(payload);
+      toastSuccess(TOASTER_SUCCESS_MSG.PRODUCT_CREATION_SUCCESS);
+      resetForm();
+    } catch (error) {
+      console.error("Product creation failed:", error);
+    }
   };
 
   const INITIAL_FORM_STATE = {
