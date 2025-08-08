@@ -1,34 +1,17 @@
-import React, { type JSX } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Login } from "./pages/Login/Login";
 import { UserDashboard } from "./components/User/UserDashboard";
 import { AdminDashboard } from "./components/Admin/AdminDashboard";
 
 import { Registration } from "./pages/Registration/Registration";
-import { LOCAL_STORAGE } from "./utils/enum";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Page } from "./utils/route";
-import { Layout } from "./components/Layout/Layout";
 import ProtectedUser from "./components/ProtectedUser/ProtectedUser";
 import ProtectedAdmin from "./components/ProtectedAdmin/ProtectedAdmin";
-
-interface ProtectedRouteProps {
-  children: JSX.Element;
-}
-
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const isAuthenticated =
-    localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN) !== null;
-
-  return isAuthenticated ? children : <Navigate to={Page.LOGIN_PAGE} replace />;
-};
+import { Navbar } from "./components/Navbar/Navbar";
 
 const App: React.FC = () => {
   return (
@@ -38,18 +21,15 @@ const App: React.FC = () => {
           <Route path={Page.LOGIN_PAGE} element={<Login />} />
           <Route path={Page.REGISTRATION_PAGE} element={<Registration />} />
 
-          <Route
-            element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }
-          >
+          <Route>
             <Route
               path={Page.USER_DASHBOARD}
               element={
                 <ProtectedUser>
-                  <UserDashboard />
+                  <>
+                    <Navbar />
+                    <UserDashboard />
+                  </>
                 </ProtectedUser>
               }
             />
@@ -57,7 +37,10 @@ const App: React.FC = () => {
               path={Page.ADMIN_DASHBOARD}
               element={
                 <ProtectedAdmin>
-                  <AdminDashboard />
+                  <>
+                    <Navbar />
+                    <AdminDashboard />
+                  </>
                 </ProtectedAdmin>
               }
             />

@@ -62,9 +62,16 @@ export const Login: React.FC = () => {
         accessToken: response,
         email: values.email,
       };
+      console.log("response", response);
+      const role = response.data.user.role;
       localStorage.setItem(access_token, tokenData.accessToken.data.token);
       toastSuccess(TOASTER_SUCCESS_MSG.IS_LOGIN);
-      navigate(Page.USER_DASHBOARD);
+      if (role === "admin") {
+        navigate(Page.ADMIN_DASHBOARD);
+        return;
+      } else {
+        navigate(Page.USER_DASHBOARD);
+      }
     } catch (error) {
       toastError(TOASTER_ERROR_MSG.IS_LOGIN_FAILED);
       console.error("Login error:", error);
