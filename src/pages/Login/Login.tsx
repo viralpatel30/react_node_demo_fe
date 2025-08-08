@@ -57,13 +57,11 @@ export const Login: React.FC = () => {
         password: values.password,
       };
       const response = await loginUser(data);
-      console.log("response", response);
       // Set access token in local storage
       const tokenData = {
         accessToken: response,
         email: values.email,
       };
-      console.log("tokenData", tokenData);
       localStorage.setItem(access_token, tokenData.accessToken.data.token);
       toastSuccess(TOASTER_SUCCESS_MSG.IS_LOGIN);
       navigate(Page.USER_DASHBOARD);
@@ -75,7 +73,7 @@ export const Login: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <Box p={3} className="bg-white shadow-lg rounded-lg w-[400px]">
+      <Box p={3} className="bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
         <Formik
           initialValues={INITIAL_FORM_STATE}

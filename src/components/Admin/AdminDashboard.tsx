@@ -11,6 +11,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { getProducts } from "../../services/request";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface Variant {
   name: string;
@@ -32,7 +33,6 @@ export const AdminDashboard: React.FC = () => {
     const fetchProducts = async () => {
       try {
         const productsResponse = await getProducts();
-        console.log("data", productsResponse.data);
         setProducts(productsResponse.data);
       } catch (error) {
         console.error("Error loading products:", error);
@@ -43,8 +43,6 @@ export const AdminDashboard: React.FC = () => {
 
     fetchProducts();
   }, []);
-
-  console.log("products", products);
 
   return (
     <Box sx={{ p: { xs: 2, md: 4 }, bgcolor: "#f9fafb", minHeight: "100vh" }}>
@@ -65,71 +63,69 @@ export const AdminDashboard: React.FC = () => {
       </Typography>
 
       {loading ? (
-        <Typography>Loading products...</Typography>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
+          <CircularProgress />
+        </Box>
       ) : (
         <Grid container spacing={4}>
-          {products.length > 0
-            ? products.map((product) => (
-                <Grid
-                  columns={{ xs: 12, sm: 6, md: 4 }}
-                  key={product.productId}
+          {products.length > 0 ? (
+            products.map((product) => (
+              <Grid columns={{ xs: 12, sm: 6, md: 4 }} key={product.productId}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    width: 300,
+                    borderRadius: 3,
+                    transition: "0.3s",
+                    boxShadow: 3,
+                    "&:hover": {
+                      boxShadow: 6,
+                      transform: "translateY(-5px)",
+                    },
+                  }}
                 >
-                  <Card
-                    sx={{
-                      height: "100%",
-                      width: 300,
-                      borderRadius: 3,
-                      transition: "0.3s",
-                      boxShadow: 3,
-                      "&:hover": {
-                        boxShadow: 6,
-                        transform: "translateY(-5px)",
-                      },
-                    }}
-                  >
-                    <CardActionArea>
-                      <CardContent>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                        {product.name}
+                      </Typography>
+
+                      <Divider sx={{ mb: 2 }} />
+
+                      <Typography
+                        variant="subtitle2"
+                        sx={{ fontWeight: 500, mb: 1 }}
+                      >
+                        Variants:
+                      </Typography>
+
+                      {product.variants.length > 0 ? (
+                        product.variants.map((variant, index) => (
+                          <Chip
+                            key={index}
+                            label={`${variant.name}: ₹${variant.amount}`}
+                            sx={{ mr: 1, mb: 1 }}
+                            variant="outlined"
+                            color="primary"
+                          />
+                        ))
+                      ) : (
                         <Typography
-                          variant="h6"
-                          sx={{ fontWeight: 600, mb: 1 }}
+                          variant="body2"
+                          color="text.disabled"
+                          sx={{ fontStyle: "italic" }}
                         >
-                          {product.name}
+                          No variants available
                         </Typography>
-
-                        <Divider sx={{ mb: 2 }} />
-
-                        <Typography
-                          variant="subtitle2"
-                          sx={{ fontWeight: 500, mb: 1 }}
-                        >
-                          Variants:
-                        </Typography>
-
-                        {product.variants.length > 0 ? (
-                          product.variants.map((variant, index) => (
-                            <Chip
-                              key={index}
-                              label={`${variant.name}: ₹${variant.amount}`}
-                              sx={{ mr: 1, mb: 1 }}
-                              variant="outlined"
-                              color="primary"
-                            />
-                          ))
-                        ) : (
-                          <Typography
-                            variant="body2"
-                            color="text.disabled"
-                            sx={{ fontStyle: "italic" }}
-                          >
-                            No variants available
-                          </Typography>
-                        )}
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
-                </Grid>
-              ))
-            : null}
+                      )}
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            ))
+          ) : (
+            <Typography>No products available.</Typography>
+          )}
         </Grid>
       )}
     </Box>

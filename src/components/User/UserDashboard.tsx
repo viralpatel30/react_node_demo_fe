@@ -29,7 +29,6 @@ export const UserDashboard: React.FC = () => {
         name: values.name,
         variants: values.variants,
       };
-      console.log("payload", payload);
       await createProduct(payload);
       toastSuccess(TOASTER_SUCCESS_MSG.PRODUCT_CREATION_SUCCESS);
       resetForm();

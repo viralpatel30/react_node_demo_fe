@@ -59,8 +59,7 @@ export const Registration: React.FC = () => {
         email: values.email,
         password: values.password,
       };
-      const response = await registerUser(data);
-      console.log("Registration response", response);
+      await registerUser(data);
       navigate(Page.USER_DASHBOARD);
       toastSuccess(TOASTER_SUCCESS_MSG.IS_REGISTER);
     } catch (error) {

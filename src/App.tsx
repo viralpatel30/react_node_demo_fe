@@ -15,6 +15,9 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Page } from "./utils/route";
+import { Layout } from "./components/Layout/Layout";
+import ProtectedUser from "./components/ProtectedUser/ProtectedUser";
+import ProtectedAdmin from "./components/ProtectedAdmin/ProtectedAdmin";
 
 interface ProtectedRouteProps {
   children: JSX.Element;
@@ -34,22 +37,32 @@ const App: React.FC = () => {
         <Routes>
           <Route path={Page.LOGIN_PAGE} element={<Login />} />
           <Route path={Page.REGISTRATION_PAGE} element={<Registration />} />
+
           <Route
-            path={Page.USER_DASHBOARD}
             element={
               <ProtectedRoute>
-                <UserDashboard />
+                <Layout />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path={Page.ADMIN_DASHBOARD}
-            element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route
+              path={Page.USER_DASHBOARD}
+              element={
+                <ProtectedUser>
+                  <UserDashboard />
+                </ProtectedUser>
+              }
+            />
+            <Route
+              path={Page.ADMIN_DASHBOARD}
+              element={
+                <ProtectedAdmin>
+                  <AdminDashboard />
+                </ProtectedAdmin>
+              }
+            />
+          </Route>
+
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Router>

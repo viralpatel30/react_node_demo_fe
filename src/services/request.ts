@@ -4,7 +4,6 @@ import { API_ENDPOINTS } from "../utils/route";
 import axiosInstance from "./axiosInstance";
 
 export const loginUser = async (data: { email: string; password: string }) => {
-  console.log("data", data);
   try {
     const response = await axiosInstance.post(
       API_ENDPOINTS.LOGIN,
@@ -32,12 +31,10 @@ export const registerUser = async (data: RegisterData) => {
 
 export const createProduct = async (data: ProductData) => {
   try {
-    console.log("data", data);
-    const response = await axiosInstance.post(
+    await axiosInstance.post(
       API_ENDPOINTS.CREATE_PRODUCT,
       JSON.stringify(data)
     );
-    console.log("response", response);
   } catch (err) {
     console.error("Product Creation failed:", err);
     throw err;

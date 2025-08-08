@@ -1,69 +1,98 @@
-# React + TypeScript + Vite
+# Assignment Task – Full Stack Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains both the UI (Frontend) and Backend for the Assignment Task project.
+The application features role-based authentication, a MySQL database, and a secure API using JWT.
 
-Currently, two official plugins are available:
+## 📂 UI – Frontend 🚀 Tech Stack React with Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- TypeScript
 
-## Expanding the ESLint configuration
+- React Router DOM (for routing)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Role-Based Authentication
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- React Toastify (for notifications)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 📦 Installation & Setup Clone the repository
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Extract the zip file.
+
+- Install dependencies by running:
+
+  ```bash
+  npm install
+
+  ```
+
+- Change directory to the project folder:
+
+  ```bash
+  cd <project-folder-name>
+
+  ```
+
+- Run the development server:
+  ```bash
+  npm run dev
+  ```
+- Access the app in your browser at:
+  ```bash
+  http://localhost:5173
+  ```
+
+## 📂 Backend – Node.js + Express + MySQL
+
+### Prerequisites
+
+- Node.js and npm installed
+
+- MySQL installed and running
+
+### Setup Instructions
+
+#### Extract the backend project zip (or navigate to the backend folder).
+
+#### Install dependencies:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Create a MySQL database named:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+assignment_task
 ```
+
+- Open the database.js (or equivalent config file) and update the database connection with your MySQL root password:
+
+```bash
+const sequelize = new Sequelize("assignment_task", "root", "your_mysql_password", {
+  dialect: "mysql",
+  host: "localhost",
+});
+```
+
+-Run the backend server (depending on your setup, e.g.,):
+
+```bash
+npm run dev
+```
+
+### Create Admin User
+
+#### Add an user record in the users table of your MySQL database using register and change its role to admin for one admine role:
+
+| Field  | Value   |
+| :----- | :------ |
+| `role` | `admin` |
+
+#### General Notes
+
+- The backend API uses JWT for authentication and role-based access control.
+
+- Ensure the frontend uses the correct backend API URL in your environment variables.
+
+- Use Postman or similar tools to test API endpoints independently.
+
+- Keep your JWT secret key safe and do not expose it publicly.
