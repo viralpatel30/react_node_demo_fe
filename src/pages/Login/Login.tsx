@@ -62,7 +62,6 @@ export const Login: React.FC = () => {
         accessToken: response,
         email: values.email,
       };
-      console.log("response", response);
       const role = response.data.user.role;
       localStorage.setItem(access_token, tokenData.accessToken.data.token);
       toastSuccess(TOASTER_SUCCESS_MSG.IS_LOGIN);

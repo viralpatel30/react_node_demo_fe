@@ -28,8 +28,6 @@ const ProtectedUser: React.FC<ProtectedUserProps> = ({ children }) => {
     }
   }, [token]);
 
-  console.log('decoded' , decoded);
-
   // Check if token is valid
   const isTokenValid = decoded && decoded.exp * 1000 > Date.now();
 
